@@ -51,4 +51,16 @@ router.get('/reprobados', (req, res) => {
   res.json(failingStudents);
 });
 
+// obtener estudiante por Numero de control
+router.get('/:noControl', (req, res)=> {
+  const nc = req.params.noControl;
+  const StudenFound = studentController.GetOneStu(nc);
+
+  if (StudenFound) {
+    res.json(StudenFound);
+  } else {
+    res.status(404).json({ error: 'No se encontro el alumno' });
+  }
+});
+
 module.exports = router

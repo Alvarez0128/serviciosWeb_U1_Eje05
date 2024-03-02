@@ -1,8 +1,9 @@
 const Student = require('../models/student');
 
 let students = [
-  
-
+  {noControl:"19400686",nombre:"Cesar",apellido:"alv",apellido2:"jim",calificacion1:"90",calificacion2:"70",calificacion3:"80",calificacion4:"0"},
+  {noControl:"19400650",nombre:"Emmanuel",apellido:"alv",apellido2:"jim",calificacion1:"70",calificacion2:"70",calificacion3:"75",calificacion4:"100"},
+  {noControl:"19400650",nombre:"Brandon",apellido:"Zuñ",apellido2:"Lop",calificacion1:"80",calificacion2:"70",calificacion3:"75",calificacion4:"80"},
 ];
 
 function getAllStudents(){
@@ -46,7 +47,13 @@ function deleteStudent(noControl) {
 
 
 function calculateAverage(student) {
-  const calificaciones = [student.calificacion1, student.calificacion2, student.calificacion3, student.calificacion4];
+  const calificaciones = [
+    parseInt(student.calificacion1),
+    parseInt(student.calificacion2),
+    parseInt(student.calificacion3),
+    parseInt(student.calificacion4)
+  ];
+
   const sum = calificaciones.reduce((acc, calificacion) => acc + calificacion, 0);
   const average = sum / calificaciones.length;
   return average;
@@ -65,7 +72,16 @@ function getTopPerformers() {
 }
 
 function getFailingStudents() {
-  return students.filter(student => calculateAverage(student) < 70);
+  return students.map(student => {
+    const average = calculateAverage(student);
+    return {
+      ...student,
+      promedio: average,
+    };
+  }).filter(student => student.promedio<70);
+}
+function GetOneStu(noControl) {
+  return StudenFound = students.find(a=> a.noControl === noControl);
 }
 
 module.exports = {
@@ -74,5 +90,6 @@ module.exports = {
   updateStudent,
   deleteStudent,
   getTopPerformers,
-  getFailingStudents
+  getFailingStudents,
+  GetOneStu
 };
