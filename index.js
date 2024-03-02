@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.use('/students',studentRoutes)
 
 app.get("/", (req, res) => {
-  res.send("Bienvenido");
+  res.send("Bienvenido a la api de estudiantes de Cesar Alvarez y Brandon Zuñiga");
 });
 
 const PORT = process.env.PORT || 3000;  //process.env es para acceder a las variables de entorno. Si existe coloca esa variable,si no establece el 3000.
